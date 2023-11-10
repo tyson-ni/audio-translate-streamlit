@@ -27,9 +27,9 @@ def identify_and_translate(text):
     return  completion.choices[0].message.content
 
 # Function to translate and transcribe audio using Whisper API
-def process_audio(audio, mode):
+def process_audio(audio):
     # Transcribe audio
-    transcription = openai.OpenAI().audio.transcriptions.create("whisper-1", audio, "text")
+    transcription = openai.OpenAI().audio.transcriptions.create(file=audio, model="whisper-1", response_format="text")
     # Identify language and translate
     translation = identify_and_translate(transcription)
     output = '{}'.format(translation)
