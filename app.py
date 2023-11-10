@@ -9,7 +9,7 @@ else:
 
 # Function to identify text using GPT-4
 def identify_and_translate(text):
-    response = openai.ChatCompletion.create(
+    completion = openai.OpenAI().chat.completions.create(
         model = 'gpt-4',
         messages = [
             {'role': 'system', 'content': """
@@ -24,12 +24,12 @@ def identify_and_translate(text):
         ],
         temperature=0.0
     )
-    return  response['choices'][0]['message']['content']
+    return  completion.choices[0].message.content
 
 # Function to translate and transcribe audio using Whisper API
 def process_audio(audio, mode):
     # Transcribe audio
-    transcription = openai.Audio.transcribe("whisper-1", audio) ['text']
+    transcription = openai.OpenAI().audio.transcriptions.create("whisper-1", audio) ['text']
     # Identify language and translate
     translation = identify_and_translate(transcription)
     output = '{}'.format(translation)
