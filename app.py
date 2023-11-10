@@ -42,5 +42,5 @@ st.header("Audio Translate and Transcribe")
 file = st.file_uploader("Upload Audio", type=["wav", "mp3", "m4a"])
 if file is not None:
     mode = st.selectbox("Select Mode", ["Translate", "Transcribe"])
-    output = process_audio(file, mode)
+    output = process_audio(file)
     st.text_area("Output", value=output)
